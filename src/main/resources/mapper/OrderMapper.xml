@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dark.graduations.mapper.OrderMapper">
+    <insert id="addOrder">
+        insert into orders (Order_Id, Stu_Id, Lesson_Id) VALUE (#{OrderId}, #{StuId}, #{LessonId})
+    </insert>
+
+    <delete id="deleteorder">
+        delete
+        from orders
+        where Order_Id = #{OrderId}
+    </delete>
+</mapper>
