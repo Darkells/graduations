@@ -9,4 +9,8 @@
         update lesson set Lesson_Margin = #{Margin} where Lesson_Id = #{LessonId}
     </update>
 
+
+    <select id="querryAll" resultType="com.dark.graduations.pojo.Lesson">
+        select * from lesson
+    </select>
 </mapper>

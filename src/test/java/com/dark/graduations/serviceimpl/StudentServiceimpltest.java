@@ -22,7 +22,7 @@ public class StudentServiceimpltest {
     @Test
     public void test() {
         Student student = new Student();
-        student.setStuId("2016044743001");
+        student.setStuId("2016044743005");
         student.setStuPwd("123456");
         log.info(studentService.StudentLogin(student));
     }

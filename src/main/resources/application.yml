@@ -14,10 +14,10 @@ spring:
       username: root
       password: 123456
     druid:
-      initial-size: 4
-      max-active: 10
+      initial-size: 10
+      max-active: 20
       max-wait: 60000
-      min-idle: 1
+      min-idle: 8
       time-between-eviction-runs-millis: 60000
       min-evictable-idle-time-millis: 300000
       pool-prepared-statements: true
@@ -43,6 +43,7 @@ spring:
         min-idle: 0
     timeout: 1000
 
+
 mybatis-plus:
   mapper-locations: classpath:/mapper/*Mapper.xml
   typeAliasesPackage: com.dark.graduations.pojo
@@ -53,4 +54,8 @@ mybatis-plus:
   configuration:
     #配置返回数据库(column下划线命名&&返回java实体是驼峰命名)，自动匹配无需as（没开启这个，SQL需要写as： select user_id as userId）
     map-underscore-to-camel-case: true
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+logging:
+  level:
+    com.dark.graduations.mapper: debug

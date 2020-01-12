@@ -3,12 +3,14 @@ package com.dark.graduations.pojo;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * 课程类
  * 课程具体信息
  */
 @Data
-public class Lesson {
+public class Lesson implements Serializable {
     private String LessonId;
 
     private String LessonName;

@@ -2,6 +2,9 @@ package com.dark.graduations.vo;
 
 import lombok.Data;
 
+/**
+ * 学生选课信息查询
+ */
 @Data
 public class StudentLessonInfo {
 

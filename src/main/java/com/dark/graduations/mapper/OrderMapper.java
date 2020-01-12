@@ -7,7 +7,8 @@ import org.springframework.stereotype.Component;
 @Component
 public interface OrderMapper {
 
-    void addOrder(String OrderId, String stuId, String lessonId);
+    void addOrder(String OrderId, String StuId, String LessonId);
 
-    void deleteorder(String orderId);
+    void deleteorder(String OrderId);
+
 }

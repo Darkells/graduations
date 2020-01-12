@@ -15,7 +15,7 @@ public class SekillRemote {
 
 
     //设置并发量
-    private static final int nums = 500;
+    private static final int nums = 100;
 
     private static CountDownLatch cdl = new CountDownLatch(nums);
 
