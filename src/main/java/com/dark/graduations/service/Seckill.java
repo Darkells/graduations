@@ -7,5 +7,7 @@ import java.util.List;
 public interface Seckill {
     void sekill(String StuId, String LessonId);
 
-    List<Lesson> findAll();
+    void findAll();
+
+    void clearAll();
 }

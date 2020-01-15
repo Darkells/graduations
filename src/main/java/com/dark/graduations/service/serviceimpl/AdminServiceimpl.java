@@ -11,8 +11,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class AdminServiceimpl implements AdminService {
 
-    @Autowired
     private AdminMapper adminMapper;
+
+    @Autowired
+    public void setAdminMapper(AdminMapper adminMapper) {
+        this.adminMapper = adminMapper;
+    }
+
 
     @Override
     public JsonResult AdminLogin(Admin admin) {

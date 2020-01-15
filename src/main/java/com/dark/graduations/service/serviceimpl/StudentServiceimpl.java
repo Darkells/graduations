@@ -13,22 +13,33 @@ import java.util.List;
 
 @Service
 public class StudentServiceimpl implements StudentService {
-    @Autowired
     private StudentMapper studentMapper;
 
-    @Autowired
     private OrderMapper orderMapper;
 
-    @Autowired
     private LessonMapper lessonMapper;
 
+    @Autowired
+    public void setStudentMapper(StudentMapper studentMapper) {
+        this.studentMapper = studentMapper;
+    }
+
+    @Autowired
+    public void setOrderMapper(OrderMapper orderMapper) {
+        this.orderMapper = orderMapper;
+    }
+
+    @Autowired
+    public void setLessonMapper(LessonMapper lessonMapper) {
+        this.lessonMapper = lessonMapper;
+    }
 
     @Override
-    public String StudentLogin(Student student) {
-        String password = studentMapper.querryByStuId(student.getStuId());
+    public String StudentLogin(String StuId, String StuPwd) {
+        String password = studentMapper.querryByStuId(StuId);
         if (password == null) {
             return "帐号不存在";
-        } else if (!password.equals(student.getStuPwd())) {
+        } else if (!password.equals(StuPwd)) {
             return "密码错误";
         }
 
@@ -49,14 +60,14 @@ public class StudentServiceimpl implements StudentService {
      * 取消选课
      * @param OrderId 选课id
      * @param LessonId 课程id
-     * @return
+     * @return  取消结果
      */
     @Override
     public String QuiteLesson(String OrderId, String LessonId) {
-        /**
-         * 取消选课：
-         * 1、消除oders表里对应的数据
-         * 2、对应的课程容量+1
+        /*
+          取消选课：
+          1、消除oders表里对应的数据
+          2、对应的课程容量+1
          */
         //删除orders表内对应的数据
         orderMapper.deleteorder(OrderId);
@@ -71,12 +82,11 @@ public class StudentServiceimpl implements StudentService {
     /**
      * 学生选课信息
      * @param StuId 学号
-     * @return
+     * @return  所有选课
      */
     @Override
     public List<StudentLessonInfo> InfoLesson(String StuId) {
-        List<StudentLessonInfo> lessonList = studentMapper.querryAll(StuId);
 
-        return lessonList;
+        return studentMapper.querryAll(StuId);
     }
 }

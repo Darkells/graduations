@@ -43,6 +43,14 @@ spring:
         min-idle: 0
     timeout: 1000
 
+  #rabbitmq配置
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: admin
+    virtual-host: test
+
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/*Mapper.xml

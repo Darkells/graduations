@@ -1,0 +1,18 @@
+{
+  "properties": [
+    {
+      "name": "spring.datasource.master.url",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.master.url."
+    },
+    {
+      "name": "spring.datasource.master.username",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.master.username."
+    },
+    {
+      "name": "spring.datasource.master.password",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.master.password."
+    }
+  ] }

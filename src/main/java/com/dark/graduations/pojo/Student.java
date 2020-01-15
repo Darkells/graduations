@@ -13,22 +13,33 @@ import java.time.LocalDateTime;
  */
 @Data
 public class Student {
+    //学号
     @TableId(value = "Stu_Id", type = IdType.INPUT)
     private String StuId;
 
+    //学生专业
     private String StuMajor;
 
+    //学生姓名
     private String StuName;
 
+    //学生性别
     private String StuSex;
 
+    //学生注册时间
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime StuRegister;
 
+    //学生年级
     private String StuGrade;
 
+    //学生密码
     private String StuPwd;
 
+    /**
+     * 测试所用
+     * @return 返回学生实体类所有信息
+     */
     @Override
     public String toString() {
         return "Student{" +

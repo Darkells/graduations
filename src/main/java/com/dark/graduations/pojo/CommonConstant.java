@@ -2,6 +2,7 @@ package com.dark.graduations.pojo;
 
 import lombok.Data;
 
+//主从数据库配置所需
 @Data
 public class CommonConstant {
     /**

@@ -22,11 +22,18 @@ public class ScekillController {
 
     @RequestMapping("/findAll")
     public String findAll() {
-        List<Lesson> lessonList = seckill.findAll();
-        if (lessonList == null || lessonList.size() == 0) {
-            return "没有库存";
-        }
+//        List<Lesson> lessonList = seckill.findAll();
+//        if (lessonList == null || lessonList.size() == 0) {
+//            return "没有库存";
+//        }
+        seckill.findAll();
         return "初始化成功";
+    }
+
+    @RequestMapping("/delete")
+    public String delete() {
+        seckill.clearAll();
+        return "删除缓存";
     }
 
     @RequestMapping("/seckill")

@@ -1,6 +1,9 @@
 package com.dark.graduations.controller;
 
 import com.dark.graduations.pojo.Admin;
+import com.dark.graduations.pojo.Lesson;
+import com.dark.graduations.pojo.Student;
+import com.dark.graduations.pojo.Teacher;
 import com.dark.graduations.service.AdminService;
 import com.dark.graduations.vo.JsonResult;
 import lombok.extern.slf4j.Slf4j;
@@ -13,13 +16,164 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class AdminController {
 
-    @Autowired
     private AdminService adminService;
 
+    @Autowired
+    public void setAdminService(AdminService adminService) {
+        this.adminService = adminService;
+    }
+
+    /**
+     * 管理员登陆控制
+     * @param admin 管理员实体类
+     * @return  登陆相关信息
+     */
     @RequestMapping("login")
     public JsonResult Login(Admin admin) {
         return adminService.AdminLogin(admin);
     }
+
+    //这部分内容方便测试，所有数据应该从校方同步过来
+    /**
+     * 学生信息列表
+     * @return 所有学生信息
+     */
+    @RequestMapping("studentlist")
+    public JsonResult StudentList() {
+        return new JsonResult(200,"学生列表","请求成功");
+    }
+
+    /**
+     * 添加学生信息
+     * @param student   封装的学生的实体类
+     * @return  添加结果
+     */
+    @RequestMapping("/studentlist/add")
+    public JsonResult StudentAdd(Student student) {
+        log.info(student.toString());
+        return new JsonResult(200,"学生列表/添加学生列表","请求成功");
+    }
+
+    /**
+     * 更新学生信息
+     * @param student   封装的学生实体类
+     * @return  更新结果
+     */
+    @RequestMapping("/studentlist/update")
+    public JsonResult StudentUpdate(Student student) {
+        log.info(student.toString());
+        return null;
+    }
+
+    /**
+     * 删除学生
+     * @param StuId     学号
+     * @return  删除结果
+     */
+    @RequestMapping("/studentlist/delete")
+    public JsonResult StudentDelete(String StuId) {
+        log.info(StuId);
+        return null;
+    }
+
+    /**
+     * 教师信息列表
+     * @return  返回教师信息列表
+     */
+    @RequestMapping("teacherlist")
+    public JsonResult TeacherList() {
+        return null;
+    }
+
+    /**
+     * 添加教师
+     * @param teacher   封装教师实体类
+     * @return  返回添加教师的结果
+     */
+    @RequestMapping("teacherlist/add")
+    public JsonResult TeacherAdd(Teacher teacher) {
+        log.info(teacher.toString());
+        return null;
+    }
+
+    /**
+     * 更新教师信息
+     * @param teacher   封装教师实体类
+     * @return  返回更新教师信息结果
+     */
+    @RequestMapping("teacherlist/update")
+    public JsonResult TeacherUpdate(Teacher teacher) {
+        log.info(teacher.toString());
+        return null;
+    }
+
+    /**
+     * 删除教师
+     * @param TeaId     教师工号
+     * @return  返回删除教师结果
+     */
+    @RequestMapping("teacherlist/delete")
+    public JsonResult TeacherUpdate(String TeaId) {
+        log.info(TeaId);
+        return null;
+    }
+
+
+
+    /**
+     * 课程列表
+     * @return  返回课程列表
+     */
+    @RequestMapping("lessonlist")
+    public JsonResult LessonList() {
+        return null;
+    }
+
+    /**
+     * 添加课程
+     * @param lesson 添加的课程实体
+     * @return  返回添加结果
+     */
+    @RequestMapping("lessonlist/add")
+    public JsonResult LessonAdd(Lesson lesson) {
+        log.info(lesson.toString());
+        return null;
+    }
+
+    /**
+     * 删除课程
+     * @param LessonId 课程号
+     * @return  返回删除结果
+     */
+    @RequestMapping("lessonlist/delete")
+    public JsonResult LessonDelete(String LessonId) {
+        log.info(LessonId);
+        return null;
+    }
+
+    /**
+     * 修改课程信息
+     * @param lesson    修改课程实体
+     * @return  返回修改结果
+     */
+    @RequestMapping("lessonlist/update")
+    public JsonResult LessonUpdate(Lesson lesson) {
+        log.info(lesson.toString());
+        return null;
+    }
+
+    /**
+     * 单个课程的详细信息
+     * @param LessonId  课程号
+     * @return  返回指定课程的详细信息
+     */
+    @RequestMapping("lessonlist/select")
+    public JsonResult LessonSelect(String LessonId) {
+        log.info(LessonId);
+        return null;
+    }
+
+
 
 
 }
