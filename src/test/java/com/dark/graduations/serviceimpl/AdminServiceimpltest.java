@@ -25,6 +25,6 @@ public class AdminServiceimpltest {
         Admin admin = new Admin();
         admin.setAdminId("1");
         admin.setAdminPwd("123456");
-        log.info(adminService.AdminLogin(admin).toString());
+//        log.info(adminService.AdminLogin(admin).toString());
     }
 }

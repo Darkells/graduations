@@ -9,9 +9,22 @@
         select * from student where openid = #{OpenId}
     </select>
 
+    <update id="StudentWechat">
+        update student set openid = #{OpenId} where Stu_Id = #{StuId}
+    </update>
+
     <select id="querryAll" resultType="com.dark.graduations.vo.StudentLessonInfo">
         select Lesson_Id, Lesson_Name, Lesson_Time, Lesson_Local, Lesson_Type, Lesson_Desc, Tea_Name, Tea_Sex, Tea_Tel from (select Lesson_Id, Lesson_Name, Lesson_Time, Lesson_Local, Tea_Id, Lesson_Type, Lesson_Desc from lesson
         where Lesson_Id = (select Lesson_Id from orders where Stu_Id = #{StuId})) as result inner join teacher on result.Tea_Id = teacher.Tea_Id
     </select>
 
+    <update id="updateInfo" parameterType="com.dark.graduations.pojo.Student">
+        update student
+        <set>
+            <if test="StuPwd != null and StuPwd != ''">
+                Stu_Pwd = #{StuPwd}
+            </if>
+        </set>
+        where Stu_Id = #{StuId}
+    </update>
 </mapper>

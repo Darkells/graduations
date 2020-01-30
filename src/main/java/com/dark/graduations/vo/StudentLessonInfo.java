@@ -1,5 +1,6 @@
 package com.dark.graduations.vo;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 /**
@@ -8,22 +9,31 @@ import lombok.Data;
 @Data
 public class StudentLessonInfo {
 
+    @JsonProperty("id")
     private String LessonId;
 
+    @JsonProperty("name")
     private String LessonName;
 
+    @JsonProperty("time")
     private String LessonTime;
 
+    @JsonProperty("local")
     private String LessonLocal;
 
+    @JsonProperty("type")
     private String LessonType;
 
+    @JsonProperty("desc")
     private String LessonDesc;
 
+    @JsonProperty("teaname")
     private String TeaName;
 
+    @JsonProperty("sex")
     private String TeaSex;
 
+    @JsonProperty("tel")
     private String TeaTel;
 
     @Override

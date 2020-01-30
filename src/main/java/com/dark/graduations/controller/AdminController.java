@@ -1,14 +1,14 @@
 package com.dark.graduations.controller;
 
-import com.dark.graduations.pojo.Admin;
 import com.dark.graduations.pojo.Lesson;
 import com.dark.graduations.pojo.Student;
 import com.dark.graduations.pojo.Teacher;
 import com.dark.graduations.service.AdminService;
-import com.dark.graduations.vo.JsonResult;
+import com.dark.graduations.vo.ResultVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -25,12 +25,13 @@ public class AdminController {
 
     /**
      * 管理员登陆控制
-     * @param admin 管理员实体类
+     * @param username 管理员帐号
+     * @param password 管理员密码
      * @return  登陆相关信息
      */
-    @RequestMapping("login")
-    public JsonResult Login(Admin admin) {
-        return adminService.AdminLogin(admin);
+    @RequestMapping(value = "login", method = RequestMethod.POST)
+    public ResultVO Login(String username, String password) {
+        return adminService.AdminLogin(username, password);
     }
 
     //这部分内容方便测试，所有数据应该从校方同步过来
@@ -39,8 +40,8 @@ public class AdminController {
      * @return 所有学生信息
      */
     @RequestMapping("studentlist")
-    public JsonResult StudentList() {
-        return new JsonResult(200,"学生列表","请求成功");
+    public ResultVO StudentList() {
+        return null;
     }
 
     /**
@@ -49,9 +50,9 @@ public class AdminController {
      * @return  添加结果
      */
     @RequestMapping("/studentlist/add")
-    public JsonResult StudentAdd(Student student) {
+    public ResultVO StudentAdd(Student student) {
         log.info(student.toString());
-        return new JsonResult(200,"学生列表/添加学生列表","请求成功");
+        return null;
     }
 
     /**
@@ -60,7 +61,7 @@ public class AdminController {
      * @return  更新结果
      */
     @RequestMapping("/studentlist/update")
-    public JsonResult StudentUpdate(Student student) {
+    public ResultVO StudentUpdate(Student student) {
         log.info(student.toString());
         return null;
     }
@@ -71,7 +72,7 @@ public class AdminController {
      * @return  删除结果
      */
     @RequestMapping("/studentlist/delete")
-    public JsonResult StudentDelete(String StuId) {
+    public ResultVO StudentDelete(String StuId) {
         log.info(StuId);
         return null;
     }
@@ -81,7 +82,7 @@ public class AdminController {
      * @return  返回教师信息列表
      */
     @RequestMapping("teacherlist")
-    public JsonResult TeacherList() {
+    public ResultVO TeacherList() {
         return null;
     }
 
@@ -91,7 +92,7 @@ public class AdminController {
      * @return  返回添加教师的结果
      */
     @RequestMapping("teacherlist/add")
-    public JsonResult TeacherAdd(Teacher teacher) {
+    public ResultVO TeacherAdd(Teacher teacher) {
         log.info(teacher.toString());
         return null;
     }
@@ -102,7 +103,7 @@ public class AdminController {
      * @return  返回更新教师信息结果
      */
     @RequestMapping("teacherlist/update")
-    public JsonResult TeacherUpdate(Teacher teacher) {
+    public ResultVO TeacherUpdate(Teacher teacher) {
         log.info(teacher.toString());
         return null;
     }
@@ -113,7 +114,7 @@ public class AdminController {
      * @return  返回删除教师结果
      */
     @RequestMapping("teacherlist/delete")
-    public JsonResult TeacherUpdate(String TeaId) {
+    public ResultVO TeacherUpdate(String TeaId) {
         log.info(TeaId);
         return null;
     }
@@ -125,7 +126,7 @@ public class AdminController {
      * @return  返回课程列表
      */
     @RequestMapping("lessonlist")
-    public JsonResult LessonList() {
+    public ResultVO LessonList() {
         return null;
     }
 
@@ -135,7 +136,7 @@ public class AdminController {
      * @return  返回添加结果
      */
     @RequestMapping("lessonlist/add")
-    public JsonResult LessonAdd(Lesson lesson) {
+    public ResultVO LessonAdd(Lesson lesson) {
         log.info(lesson.toString());
         return null;
     }
@@ -146,7 +147,7 @@ public class AdminController {
      * @return  返回删除结果
      */
     @RequestMapping("lessonlist/delete")
-    public JsonResult LessonDelete(String LessonId) {
+    public ResultVO LessonDelete(String LessonId) {
         log.info(LessonId);
         return null;
     }
@@ -157,7 +158,7 @@ public class AdminController {
      * @return  返回修改结果
      */
     @RequestMapping("lessonlist/update")
-    public JsonResult LessonUpdate(Lesson lesson) {
+    public ResultVO LessonUpdate(Lesson lesson) {
         log.info(lesson.toString());
         return null;
     }
@@ -168,7 +169,7 @@ public class AdminController {
      * @return  返回指定课程的详细信息
      */
     @RequestMapping("lessonlist/select")
-    public JsonResult LessonSelect(String LessonId) {
+    public ResultVO LessonSelect(String LessonId) {
         log.info(LessonId);
         return null;
     }

@@ -9,6 +9,8 @@ public interface OrderMapper {
 
     void addOrder(String OrderId, String StuId, String LessonId);
 
-    void deleteorder(String OrderId);
+    void deleteOrder(String OrderId);
+
+    String getOrder(String StuId, String LessonId);
 
 }

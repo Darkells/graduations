@@ -17,6 +17,10 @@ public interface StudentMapper extends BaseMapper<Student> {
     //微信小程序端登陆验证
     Student querryByOpenId(String OpenId);
 
+    void studentWechat(String StuId, String OpneId);
+
     //获取学生已经选课信息
     List<StudentLessonInfo> querryAll(String StuId);
+
+    void updateInfo(Student student);
 }

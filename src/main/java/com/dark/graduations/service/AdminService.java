@@ -1,8 +1,7 @@
 package com.dark.graduations.service;
 
-import com.dark.graduations.pojo.Admin;
-import com.dark.graduations.vo.JsonResult;
+import com.dark.graduations.vo.ResultVO;
 
 public interface AdminService {
-    JsonResult AdminLogin(Admin admin);
+    ResultVO AdminLogin(String username, String password);
 }

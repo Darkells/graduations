@@ -24,7 +24,7 @@ public class StudentServiceimpltest {
         Student student = new Student();
         student.setStuId("2016044743005");
         student.setStuPwd("123456");
-        log.info(studentService.StudentLogin(student));
+//        log.info(studentService.StudentLogin(student));
     }
 
     /**
@@ -32,7 +32,7 @@ public class StudentServiceimpltest {
      */
     @Test
     public void testWechatLogin() {
-        log.info(studentService.WechatLogin("o8sDm5XceZ4vnvCnerD"));
+        log.info(studentService.WechatLogin("o8sDm5XceZ4vnvCnerD").toString());
     }
 
     /**

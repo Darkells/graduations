@@ -9,8 +9,11 @@
         update lesson set Lesson_Margin = #{Margin} where Lesson_Id = #{LessonId}
     </update>
 
-
     <select id="querryAll" resultType="com.dark.graduations.pojo.Lesson">
-        select * from lesson
+        select * from lesson;
+    </select>
+
+    <select id="querryLessoninfo" resultType="com.dark.graduations.pojo.Lesson">
+        select Lesson_Id, Lesson_Name, Lesson_Time, Lesson_Local, Lesson_Type, Lesson_Desc, Tea_Name, Tea_Sex, Tea_Tel from lesson inner join teacher on teacher.Tea_Id = lesson.Tea_Id;
     </select>
 </mapper>

@@ -8,5 +8,6 @@ import org.springframework.stereotype.Component;
 @Mapper
 @Component
 public interface AdminMapper extends BaseMapper<Admin> {
-    String querryByAdminId(String adminId);
+
+    String querryByAdminAcount(String username);
 }

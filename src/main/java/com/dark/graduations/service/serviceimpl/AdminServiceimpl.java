@@ -2,9 +2,9 @@ package com.dark.graduations.service.serviceimpl;
 
 import com.dark.graduations.enums.ResultEnums;
 import com.dark.graduations.mapper.AdminMapper;
-import com.dark.graduations.pojo.Admin;
 import com.dark.graduations.service.AdminService;
-import com.dark.graduations.vo.JsonResult;
+import com.dark.graduations.vo.ResultVO;
+import com.dark.graduations.vo.ResultVOUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,18 +18,20 @@ public class AdminServiceimpl implements AdminService {
         this.adminMapper = adminMapper;
     }
 
-
+    /**
+     * 登陆逻辑处理
+     * @param username 管理员用户名
+     * @param password 密码
+     * @return  返回封装好登陆结果
+     */
     @Override
-    public JsonResult AdminLogin(Admin admin) {
-        String password = adminMapper.querryByAdminId(admin.getAdminId());
-        JsonResult jsonResult = JsonResult.build(200, ResultEnums.LOGIN_SUCCESS.toString(), "响应成功");
-        if (password == null) {
-            jsonResult.setData(ResultEnums.LOGIN_ACCOUNT.toString());
-        } else if (!password.equals(admin.getAdminPwd())) {
-            jsonResult.setData(ResultEnums.LOGIN_PASSWORD.toString());
-        } else {
-            jsonResult.setData(ResultEnums.LOGIN_SUCCESS.toString());
+    public ResultVO AdminLogin(String username, String password) {
+        String AdminPwd = adminMapper.querryByAdminAcount(username);
+        if (AdminPwd == null) {
+            return ResultVOUtil.error(ResultEnums.LOGIN_ACCOUNT.toMap());
+        } else if (!password.equals(AdminPwd)) {
+            return ResultVOUtil.error(ResultEnums.LOGIN_PASSWORD.toMap());
         }
-        return jsonResult;
+        return ResultVOUtil.success();
     }
 }

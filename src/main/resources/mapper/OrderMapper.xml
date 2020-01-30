@@ -5,7 +5,7 @@
         insert into orders (Order_Id, Stu_Id, Lesson_Id) VALUE (#{OrderId}, #{StuId}, #{LessonId})
     </insert>
 
-    <delete id="deleteorder">
+    <delete id="deleteOrder">
         delete
         from orders
         where Order_Id = #{OrderId}
