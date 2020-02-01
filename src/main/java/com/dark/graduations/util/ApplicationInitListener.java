@@ -1,8 +1,9 @@
-package com.dark.graduations.service;
+package com.dark.graduations.util;
 
 
 import com.dark.graduations.mapper.LessonMapper;
 import com.dark.graduations.pojo.Lesson;
+import com.dark.graduations.service.AdminService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -21,18 +22,26 @@ public class ApplicationInitListener implements ApplicationListener<ContextRefre
 
     private final String key = "lesson";
 
-    @Autowired
     private LessonMapper lessonMapper;
 
     @Autowired
+    public void setLessonMapper(LessonMapper lessonMapper) {
+        this.lessonMapper = lessonMapper;
+    }
+
     private RedisTemplate redisTemplate;
+
+    @Autowired
+    public void setRedisTemplate(RedisTemplate redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
 
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         if(event.getApplicationContext().getParent() == null) {
             log.info(">>>>>>>>>>>>项目初始化完成，执行监听器中逻辑");
-            //mapper中的sql，返回全部上架（支持秒杀）的商品集合
+            //mapper中的sql，返回全部上架（支持秒杀）的课程集合
 
             List result = redisTemplate.boundHashOps(key).values();
             if (result == null || result.size() == 0) {

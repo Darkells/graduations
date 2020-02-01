@@ -5,4 +5,7 @@
         select Admin_Pwd from admin where Admin_Acount = #{username}
     </select>
 
+    <select id="querryAllStudent" resultType="com.dark.graduations.pojo.Student">
+        select * from student
+    </select>
 </mapper>

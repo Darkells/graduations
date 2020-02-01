@@ -13,7 +13,7 @@
         select * from lesson;
     </select>
 
-    <select id="querryLessoninfo" resultType="com.dark.graduations.pojo.Lesson">
+    <select id="querryLessoninfo" resultType="com.dark.graduations.vo.StudentLessonInfo">
         select Lesson_Id, Lesson_Name, Lesson_Time, Lesson_Local, Lesson_Type, Lesson_Desc, Tea_Name, Tea_Sex, Tea_Tel from lesson inner join teacher on teacher.Tea_Id = lesson.Tea_Id;
     </select>
 </mapper>

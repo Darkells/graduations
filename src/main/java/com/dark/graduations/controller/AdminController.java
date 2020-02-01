@@ -41,7 +41,7 @@ public class AdminController {
      */
     @RequestMapping("studentlist")
     public ResultVO StudentList() {
-        return null;
+        return adminService.StudentList();
     }
 
     /**
@@ -51,8 +51,7 @@ public class AdminController {
      */
     @RequestMapping("/studentlist/add")
     public ResultVO StudentAdd(Student student) {
-        log.info(student.toString());
-        return null;
+        return adminService.AddStudent(student);
     }
 
     /**
@@ -62,8 +61,7 @@ public class AdminController {
      */
     @RequestMapping("/studentlist/update")
     public ResultVO StudentUpdate(Student student) {
-        log.info(student.toString());
-        return null;
+        return adminService.UpdateStudent(student);
     }
 
     /**
@@ -73,8 +71,7 @@ public class AdminController {
      */
     @RequestMapping("/studentlist/delete")
     public ResultVO StudentDelete(String StuId) {
-        log.info(StuId);
-        return null;
+        return adminService.DeleteStudent(StuId);
     }
 
     /**

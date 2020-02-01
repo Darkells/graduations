@@ -41,7 +41,7 @@ public class StudentServiceimpl implements StudentService {
      * 学生网页登陆
      * @param StuId　学号
      * @param StuPwd　密码
-     * @return
+     * @return 结果
      */
     @Override
     public ResultVO StudentLogin(String StuId, String StuPwd) {
@@ -58,7 +58,7 @@ public class StudentServiceimpl implements StudentService {
     /**
      * 微信登陆
      * @param OpenId openid
-     * @return
+     * @return 结果
      */
     @Override
     public ResultVO WechatLogin(String OpenId) {
