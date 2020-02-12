@@ -6,6 +6,8 @@ import com.dark.graduations.vo.ResultVO;
 public interface AdminService {
     ResultVO AdminLogin(String username, String password);
 
+    ResultVO Menus(String username);
+
     //学生CURD
     ResultVO StudentList();
 
@@ -14,4 +16,5 @@ public interface AdminService {
     ResultVO UpdateStudent(Student student);
 
     ResultVO DeleteStudent(String StuId);
+
 }

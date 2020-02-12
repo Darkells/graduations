@@ -4,20 +4,20 @@ import com.dark.graduations.enums.ResultEnums;
 import com.dark.graduations.pojo.Student;
 import com.dark.graduations.service.StudentService;
 import com.dark.graduations.util.Openid;
+import com.dark.graduations.util.token.TokenUtil;
+import com.dark.graduations.util.token.UserLoginToken;
 import com.dark.graduations.vo.ResultVO;
-import com.dark.graduations.vo.ResultVOUtil;
+import com.dark.graduations.dto.ResultVOUtil;
 import com.dark.graduations.vo.StudentLessonInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 
 @RestController
-@RequestMapping("/dark/student")
+@RequestMapping("/student")
 @Slf4j
 public class StudentController {
     private StudentService studentService;
@@ -33,7 +33,7 @@ public class StudentController {
      * @return  返回登陆结果
      */
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public ResultVO Login(String StuId, String StuPwd) {
+    public ResultVO Login(@RequestParam(value = "username") String StuId,@RequestParam(value = "password") String StuPwd) {
         return studentService.StudentLogin(StuId, StuPwd);
     }
 
@@ -48,7 +48,7 @@ public class StudentController {
         依据小程序传来的token获取对应的openid,依据openid和用户绑定的信息对比
          */
         if (code.isEmpty()) {
-           return ResultVOUtil.error(1, ResultEnums.CODE_NULL.toString());
+           return ResultVOUtil.error(ResultEnums.CODE_NULL.toString(), 500);
         }
         String[] result = Openid.getopenid(code);
 //        log.info("session_key :" + session_key + " openid:"+ openid);
@@ -62,7 +62,7 @@ public class StudentController {
         依据小程序传来的token获取对应的openid
          */
         if (code.isEmpty()) {
-            return ResultVOUtil.error(1, ResultEnums.CODE_NULL.toString());
+            return ResultVOUtil.error(ResultEnums.CODE_NULL.toString(), 500);
         }
         String[] result = Openid.getopenid(code);
         return studentService.StudentWechat(StuId, StuPwd, result[1]);
@@ -75,7 +75,7 @@ public class StudentController {
     @RequestMapping(value = "lessonlist")
     public ResultVO LessonList() {
         List<StudentLessonInfo> lessonInfos = studentService.LessonList();
-        return ResultVOUtil.success(lessonInfos);
+        return ResultVOUtil.success(lessonInfos, "获取成功");
     }
 
     /**
@@ -91,5 +91,18 @@ public class StudentController {
     @RequestMapping(value = "quitelesson")
     public ResultVO quite(String StuId, String LessonId) {
         return studentService.QuiteLesson(StuId, LessonId);
+    }
+
+
+    /***
+     * 这个请求需要验证token才能访问
+     * @return String 返回类型
+     */
+    @UserLoginToken
+    @GetMapping("/getMessage")
+    public String getMessage() {
+        // 取出token中带的用户id 进行操作
+        log.info(TokenUtil.getTokenUserId());
+        return "你已通过验证";
     }
 }

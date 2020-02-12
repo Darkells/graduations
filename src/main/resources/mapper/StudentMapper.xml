@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.dark.graduations.mapper.StudentMapper">
-    <select id="querryByStuId" resultType="String">
-        select Stu_Pwd from student where Stu_Id = #{StuId}
+    <select id="querryByStuId" resultType="com.dark.graduations.pojo.Student">
+        select * from student where Stu_Id = #{StuId}
     </select>
 
     <select id="querryByOpenId" resultType="com.dark.graduations.pojo.Student">

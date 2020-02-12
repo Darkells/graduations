@@ -12,7 +12,7 @@ import java.util.List;
 @Component
 public interface StudentMapper extends BaseMapper<Student> {
     //登陆验证
-    String querryByStuId(String StuId);
+    Student querryByStuId(String StuId);
 
     //微信小程序端登陆验证
     Student querryByOpenId(String OpenId);

@@ -6,12 +6,16 @@ import com.dark.graduations.mapper.OrderMapper;
 import com.dark.graduations.mapper.StudentMapper;
 import com.dark.graduations.pojo.Student;
 import com.dark.graduations.service.StudentService;
+import com.dark.graduations.service.TokenService;
 import com.dark.graduations.vo.ResultVO;
-import com.dark.graduations.vo.ResultVOUtil;
+import com.dark.graduations.dto.ResultVOUtil;
 import com.dark.graduations.vo.StudentLessonInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class StudentServiceimpl implements StudentService {
@@ -20,6 +24,8 @@ public class StudentServiceimpl implements StudentService {
     private OrderMapper orderMapper;
 
     private LessonMapper lessonMapper;
+
+    private TokenService tokenService;
 
     @Autowired
     public void setStudentMapper(StudentMapper studentMapper) {
@@ -36,7 +42,10 @@ public class StudentServiceimpl implements StudentService {
         this.lessonMapper = lessonMapper;
     }
 
-
+    @Autowired
+    public void setTokenService(TokenService tokenService) {
+        this.tokenService = tokenService;
+    }
     /**
      * 学生网页登陆
      * @param StuId　学号
@@ -45,13 +54,16 @@ public class StudentServiceimpl implements StudentService {
      */
     @Override
     public ResultVO StudentLogin(String StuId, String StuPwd) {
-        String password = studentMapper.querryByStuId(StuId);
-        if (password == null) {
-            return ResultVOUtil.error(ResultEnums.LOGIN_ACCOUNT.toMap());
-        } else if (!password.equals(StuPwd)) {
-            return ResultVOUtil.error(ResultEnums.LOGIN_PASSWORD.toMap());
+        Student student = studentMapper.querryByStuId(StuId);
+        if (student == null) {
+            return ResultVOUtil.error(ResultEnums.LOGIN_ACCOUNT.toString(), 500);
+        } else if (!student.getStuPwd().equals(StuPwd)) {
+            return ResultVOUtil.error(ResultEnums.LOGIN_PASSWORD.toString(), 500);
         }
-        return ResultVOUtil.success();
+        Map<String,String> loginResult = new HashMap<>();
+        loginResult.put("username",student.getStuName());
+        loginResult.put("token", tokenService.getToken(student.getStuId(), student.getStuPwd()));
+        return ResultVOUtil.success(loginResult, "登陆成功");
     }
 
 
@@ -65,21 +77,24 @@ public class StudentServiceimpl implements StudentService {
         Student student = studentMapper.querryByOpenId(OpenId);
 
         if (student == null) {
-            return ResultVOUtil.error(ResultEnums.LOGIN_ACCOUNT.toMap());
+            return ResultVOUtil.error(ResultEnums.LOGIN_ACCOUNT.toString(), 500);
         }
-        return ResultVOUtil.success();
+
+        Map<String, String> result = new HashMap<>();
+        result.put("token", tokenService.getToken(OpenId, student.getStuId()));
+        return ResultVOUtil.success("登陆成功");
     }
 
     @Override
     public ResultVO StudentWechat(String StuId, String StuPwd,String OpenId) {
-        String password = studentMapper.querryByStuId(StuId);
-        if (password == null) {
-            return ResultVOUtil.error(ResultEnums.LOGIN_ACCOUNT.toMap());
-        } else if (!password.equals(StuPwd)) {
-            return ResultVOUtil.error(ResultEnums.LOGIN_PASSWORD.toMap());
+        Student student = studentMapper.querryByStuId(StuId);
+        if (student.getStuPwd() == null) {
+            return ResultVOUtil.error(ResultEnums.LOGIN_ACCOUNT.toString(), 500);
+        } else if (!student.getStuPwd().equals(StuPwd)) {
+            return ResultVOUtil.error(ResultEnums.LOGIN_PASSWORD.toString(), 500);
         }
         studentMapper.studentWechat(StuId, OpenId);
-        return ResultVOUtil.success();
+        return ResultVOUtil.success("绑定成功");
     }
 
     /**
@@ -98,7 +113,7 @@ public class StudentServiceimpl implements StudentService {
         String OrderId = orderMapper.getOrder(StuId, LessonId);
 
         if (OrderId == null) {
-            return ResultVOUtil.error(ResultEnums.EMPTY_ORDER.toMap());
+            return ResultVOUtil.error(ResultEnums.EMPTY_ORDER.toString(), 500);
         }
 
         //删除orders表内对应的数据
@@ -108,7 +123,7 @@ public class StudentServiceimpl implements StudentService {
 
         lessonMapper.updateMargin(LessonId, margin);
 
-        return ResultVOUtil.success();
+        return ResultVOUtil.success("取消成功");
     }
 
     /**
@@ -134,6 +149,6 @@ public class StudentServiceimpl implements StudentService {
     @Override
     public ResultVO UpdateInfo(Student student) {
         studentMapper.updateInfo(student);
-        return ResultVOUtil.success();
+        return ResultVOUtil.success("更新成功");
     }
 }

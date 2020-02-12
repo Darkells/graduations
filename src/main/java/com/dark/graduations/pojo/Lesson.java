@@ -15,6 +15,9 @@ public class Lesson implements Serializable {
     //课程ID
     private String LessonId;
 
+    //课程状态
+    private Integer LessonRid;
+
     //课程名
     private String LessonName;
 
